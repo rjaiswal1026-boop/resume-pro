@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Resumer Pro — Free Resume Builder</title>
+<style>
+:root{--bg:#fafaf9;--card:#fff;--tx:#1c1f24;--mu:#5b6470;--bd:#e4e4e0;--ac:#2f5bea;--acx:#fff;--ok:#1a7f4b;--er:#b42318;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171a;--card:#1e2126;--tx:#eceef1;--mu:#9aa3af;--bd:#2d3239;--ac:#7c9cff;--acx:#111;--ok:#4cc38a;--er:#ff8a80}}
+:root[data-theme="dark"]{--bg:#15171a;--card:#1e2126;--tx:#eceef1;--mu:#9aa3af;--bd:#2d3239;--ac:#7c9cff;--acx:#111;--ok:#4cc38a;--er:#ff8a80}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.btn{border:1px solid var(--bd);background:var(--card);border-radius:8px;padding:8px 14px;cursor:pointer;min-height:40px}
+.btn:hover{border-color:var(--ac)}.btn:active{transform:translateY(1px)}
+.btn.p{background:var(--ac);color:var(--acx);border-color:var(--ac);font-weight:600}
+.btn.s{min-height:32px;padding:3px 10px;font-size:13px}.btn.d{color:var(--er)}
+header.top{display:flex;align-items:center;gap:16px;padding:12px 20px;border-bottom:1px solid var(--bd);background:var(--card);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+.logo{font-weight:700;font-size:18px;margin-right:auto}.logo span{color:var(--ac)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;padding:56px 0}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.1;margin:0 0 14px;letter-spacing:-.02em}
+.lead{color:var(--mu);font-size:17px;margin:0 0 24px}.row{display:flex;gap:10px;flex-wrap:wrap}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:12px 0 48px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:18px}
+.card h3{margin:0 0 6px;font-size:16px}.card p{margin:0;color:var(--mu);font-size:14px}
+h2{font-size:24px;margin:40px 0 8px}
+details{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px 16px;margin-bottom:8px}summary{cursor:pointer;font-weight:600}
+footer{border-top:1px solid var(--bd);padding:24px 20px;color:var(--mu);font-size:13px;text-align:center;margin-top:48px}
+#app{display:none}
+.ed{display:grid;grid-template-columns:170px minmax(0,1fr) minmax(0,1fr);gap:16px;padding:16px 20px;align-items:start}
+.nav{position:sticky;top:70px;display:flex;flex-direction:column;gap:4px}
+.nav button{text-align:left;border:0;background:none;padding:8px 10px;border-radius:8px;cursor:pointer}
+.nav button.on{background:var(--card);border:1px solid var(--bd);font-weight:600}
+.pane{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:18px;min-width:0}
+.pane h2{margin:0 0 12px;font-size:18px}
+label{display:block;font-size:13px;font-weight:600;margin:10px 0 4px}
+input[type=text],input[type=email],input[type=url],input[type=tel],input[type=month],textarea,select{width:100%;border:1px solid var(--bd);background:var(--bg);border-radius:8px;padding:8px 10px}
+textarea{min-height:90px;resize:vertical}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.entry{border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:12px}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px;font-size:13px;color:var(--mu)}
+#st{margin-left:auto}.hint{font-size:12px;color:var(--mu);margin-top:4px}
+.prevwrap{overflow-x:auto;position:sticky;top:70px}
+.page{background:#fff;color:#111;width:100%;min-height:600px;padding:var(--pd,34px 36px);font-size:var(--fs,12px);line-height:var(--lh,1.45);border:1px solid var(--bd);box-shadow:0 1px 3px rgba(0,0,0,.08);font-family:Georgia,serif}
+.page h1{font-size:24px;margin:0;letter-spacing:0}.page .sub{color:#444;margin:2px 0 4px;font-size:13px}
+.page .ct{color:#444;font-size:11px;margin-bottom:10px}
+.page h4{margin:14px 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid #999;padding-bottom:2px;break-after:avoid}
+.page .it{margin-bottom:8px;break-inside:avoid}.page .hd{display:flex;justify-content:space-between;gap:8px;font-weight:700}
+.page .hd span:last-child{font-weight:400;color:#555;white-space:nowrap}.page p{margin:2px 0;white-space:pre-wrap}
+.page.modern{font-family:system-ui,sans-serif;border-top:8px solid var(--pc,#2f5bea)}.page.modern h1,.page.modern h4{color:var(--pc,#2f5bea)}.page.modern h4{border-bottom:2px solid var(--pc,#2f5bea)}
+.page.technical{font-family:ui-monospace,Menlo,Consolas,monospace}.page.technical h4{border:0;background:#eee;padding:2px 6px;letter-spacing:.04em}
+.page.sz-a4{aspect-ratio:210/297}.page.sz-letter{aspect-ratio:8.5/11}.page{position:relative}.pb{position:absolute;left:0;right:0;border-top:2px dashed var(--er);font:11px system-ui,sans-serif;color:var(--er);text-align:right;pointer-events:none}.page.executive h1{text-align:center;font-size:28px;letter-spacing:.05em;text-transform:uppercase}.page.executive .sub,.page.executive .ct{text-align:center}.page.executive h4{border-bottom:2px solid #111;color:#111}.page.creative{font-family:"Trebuchet MS",system-ui,sans-serif}.page.creative h1{font-size:34px;line-height:1;color:var(--pc,#2f5bea)}.page.creative h4{border:0;color:#fff;background:var(--pc,#2f5bea);display:inline-block;padding:2px 10px;border-radius:12px;letter-spacing:.06em}
+.ctl{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}.ctl select{width:auto}
+.tog{display:none;gap:8px;margin:12px 20px 0}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.ed{grid-template-columns:1fr}.nav{position:static;flex-direction:row;overflow-x:auto}.nav button{white-space:nowrap}.tog{display:flex}.ed.pv .pane.f,.ed.pv .nav{display:none}.ed:not(.pv) .prevwrap{display:none}.prevwrap{position:static}.two{grid-template-columns:1fr}}
+@media print{body *{visibility:hidden}#print,#print *{visibility:visible}#print{position:absolute;left:0;top:0;width:100%}.page{border:0;box-shadow:none;aspect-ratio:auto!important;padding:0}.pb{display:none!important}@page{margin:14mm}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+
+<div id="home">
+<header class="top"><div class="logo">Resumer Pro</div>
+<a href="#templates" style="color:inherit">Templates</a><a href="#faq" style="color:inherit">FAQ</a>
+<button class="btn p" data-go="app">Create Resume Free</button></header>
+<main class="wrap">
+<section class="hero"><div>
+<h1>Build a clean, professional resume — free.</h1>
+<p class="lead">Fill in structured sections, watch a live preview update, switch templates without losing content, and save a PDF. No account needed; your draft stays in this browser.</p>
+<div class="row"><button class="btn p" data-go="app">Create My Resume Free</button><a class="btn" href="#templates" style="text-decoration:none">Explore Templates</a></div></div>
+<div id="heroPrev" aria-label="Sample resume preview"></div></section>
+<div class="grid3">
+<div class="card"><h3>Guided sections</h3><p>Personal info, summary, experience, education, skills and projects with add, remove and reorder.</p></div>
+<div class="card"><h3>Templates that keep content</h3><p>Content is stored separately from design, so switching templates never loses data.</p></div>
+<div class="card"><h3>Free PDF export</h3><p>Pick A4 or US Letter and save as PDF through your browser's print dialog.</p></div>
+<div class="card"><h3>Private by default</h3><p>Drafts live in your browser's local storage. Nothing is uploaded in this version.</p></div></div>
+<h2 id="templates">Templates</h2>
+<div class="grid3"><div class="card"><h3>Classic ATS</h3><p>Single column, serif, minimal decoration.</p></div><div class="card"><h3>Modern Professional</h3><p>Accent color and clear hierarchy.</p></div><div class="card"><h3>Technical</h3><p>Compact monospace for engineering roles.</p></div></div>
+<h2>How it works</h2><div class="grid3"><div class="card"><h3>1. Enter details</h3><p>Fill the sections you need.</p></div><div class="card"><h3>2. Pick a template</h3><p>Customize accent color and paper size.</p></div><div class="card"><h3>3. Save as PDF</h3><p>Review the preview, then export.</p></div></div>
+<h2 id="faq">FAQ</h2>
+<details><summary>Is it free?</summary><p>Yes. Creating, editing and exporting are free, with no account required.</p></details>
+<details><summary>Is there AI writing?</summary><p>Yes, inside claude.ai. The AI writing tab runs through your own Claude account after you give permission, and is told to use only facts already in your resume. Always review the output. Cloud accounts, resume import (PDF/DOCX) and DOCX export are not built because they need a backend.</p></details>
+<details><summary>Where is my data?</summary><p>Only in this browser's local storage. Clearing browser data removes the draft, so export a PDF you want to keep.</p></details>
+<details><summary>Will it pass every ATS?</summary><p>No tool can promise that. The Classic template is the simplest layout and the safest choice for parsers.</p></details>
+</main>
+<footer>© Folio. A free resume builder. No guarantees of interviews or ATS acceptance.</footer></div>
+
+<div id="app">
+<header class="top"><div class="logo">Resumer Pro</div>
+<button class="btn" id="theme">Theme</button><button class="btn" id="homeBtn">Home</button></header>
+<div class="tog"><button class="btn s" id="tE">Edit</button><button class="btn s" id="tP">Preview</button></div>
+<div class="ed" id="ed">
+<nav class="nav" id="nav" aria-label="Sections"></nav>
+<section class="pane f"><div class="bar"><span id="secName"></span><span id="st" role="status" aria-live="polite">Saved</span></div><div id="form"></div></section>
+<div class="prevwrap"><div class="ctl">
+<select id="tpl" aria-label="Template"><option value="classic">Classic ATS</option><option value="modern">Modern</option><option value="technical">Technical</option><option value="executive">Executive</option><option value="creative">Creative</option></select>
+<select id="size" aria-label="Paper size"><option value="a4">A4</option><option value="letter">US Letter</option></select>
+<input type="color" id="ac" aria-label="Accent color" value="#2f5bea" style="height:40px;width:44px">
+<button class="btn p" id="pdf">Save PDF</button><button class="btn" id="cp">Copy text</button><button class="btn" id="dl">Save .txt</button></div>
+<div class="ctl"><select id="fs" aria-label="Text size"><option value="11">Small text</option><option value="12">Medium text</option><option value="13">Large text</option></select><select id="lh" aria-label="Line spacing"><option value="1.3">Tight</option><option value="1.45">Normal</option><option value="1.65">Relaxed</option></select><select id="mg" aria-label="Margins"><option value="22px 24px">Narrow margins</option><option value="34px 36px">Normal margins</option><option value="48px 52px">Wide margins</option></select><button class="btn s" id="rst">Reset style</button><span class="hint" id="pgs"></span></div><div id="print"><div class="page" id="page"></div></div>
+<p class="hint" id="msg"></p></div></div></div>
+
+<script>
+const $=s=>document.querySelector(s),KEY="folio-draft-v1";
+const ORD=["summary","exp","edu","skills","proj"];const blank=()=>({tpl:"classic",size:"a4",ac:"#2f5bea",fs:"12",lh:"1.45",mg:"34px 36px",order:[...ORD],hide:[],jd:"",p:{name:"",title:"",email:"",phone:"",city:"",link:""},summary:"",exp:[],edu:[],skills:"",proj:[]});
+let S=blank(),sec="p",undo=[],redo=[],t;
+const sample={tpl:"classic",size:"a4",ac:"#2f5bea",p:{name:"Alex Morgan",title:"Marketing Analyst",email:"alex@example.com",phone:"+1 555 0100",city:"Austin, TX",link:""},summary:"Analyst with experience turning campaign data into clear reports for stakeholders.",exp:[{title:"Marketing Analyst",org:"Brightline Co.",start:"2022-03",end:"",cur:true,desc:"Built weekly reporting dashboards.\nCoordinated A/B tests with the design team."}],edu:[{school:"State University",degree:"B.A. Business",start:"2018-09",end:"2022-05"}],skills:"SQL, Excel, Google Analytics, Reporting",proj:[]};
+try{const r=localStorage.getItem(KEY);if(r)S=Object.assign(blank(),JSON.parse(r))}catch(e){}
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=m=>{if(!m)return"";const[y,mo]=m.split("-");return(mo?["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+mo-1]+" ":"")+y};
+const range=e=>{const a=fmt(e.start),b=e.cur?"Present":fmt(e.end);return a||b?`${a} – ${b}`:""};
+function resume(d,cls){const p=d.p,c=[p.email,p.phone,p.city,p.link].filter(Boolean).map(esc).join(" · ");let h="",B={};
+if(p.name)h+=`<h1>${esc(p.name)}</h1>`;if(p.title)h+=`<div class="sub">${esc(p.title)}</div>`;if(c)h+=`<div class="ct">${c}</div>`;
+if(d.summary)B.summary=`<h4>Summary</h4><p>${esc(d.summary)}</p>`;
+if(d.exp.length)B.exp="<h4>Experience</h4>"+d.exp.map(e=>`<div class="it"><div class="hd"><span>${esc(e.title)}${e.org?", "+esc(e.org):""}</span><span>${range(e)}</span></div><p>${esc(e.desc)}</p></div>`).join("");
+if(d.edu.length)B.edu="<h4>Education</h4>"+d.edu.map(e=>`<div class="it"><div class="hd"><span>${esc(e.school)}${e.degree?", "+esc(e.degree):""}</span><span>${range(e)}</span></div></div>`).join("");
+if(d.skills.trim())B.skills=`<h4>Skills</h4><p>${esc(d.skills)}</p>`;
+if(d.proj.length)B.proj="<h4>Projects</h4>"+d.proj.map(e=>`<div class="it"><div class="hd"><span>${esc(e.name)}</span><span>${esc(e.url)}</span></div><p>${esc(e.desc)}</p></div>`).join("");
+h+=(d.order||ORD).filter(k=>!(d.hide||[]).includes(k)).map(k=>B[k]||"").join("");return h||'<p style="color:#888">Start typing to see your resume here.</p>'}
+function draw(){const g=$("#page");g.className=`page ${S.tpl} sz-${S.size}`;g.style.setProperty("--pc",S.ac);g.style.setProperty("--fs",S.fs+"px");g.style.setProperty("--lh",S.lh);g.style.setProperty("--pd",S.mg);g.innerHTML=resume(S);["tpl","size","ac","fs","lh","mg"].forEach(k=>$("#"+k).value=S[k]);if(g.clientWidth){const h=g.clientWidth*(S.size==="a4"?297/210:11/8.5),n=Math.max(1,Math.ceil((g.scrollHeight-2)/h));for(let i=1;i<n;i++)g.insertAdjacentHTML("beforeend",`<div class="pb" style="top:${i*h}px">Page ${i+1} starts</div>`);$("#pgs").textContent=n+" page"+(n>1?"s":"")+" (estimate)"}}
+function save(){$("#st").textContent="Saving…";clearTimeout(t);t=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S));$("#st").textContent="Saved";$("#st").style.color="var(--ok)"}catch(e){$("#st").textContent="Save failed — storage full or blocked";$("#st").style.color="var(--er)"}},400)}
+function snap(){undo.push(JSON.stringify(S));if(undo.length>50)undo.shift();redo=[]}
+const secs=[["p","Personal info"],["s","Summary"],["x","Experience"],["e","Education"],["k","Skills"],["j","Projects"],["o","Section order"],["a","AI writing"],["c","ATS & job match"],["v","Versions"]];
+const F=(k,l,v,ty="text")=>`<label>${l}<input type="${ty}" data-k="${k}" value="${esc(v)}"></label>`;
+const T=(k,l,v,h="")=>`<label>${l}<textarea data-k="${k}">${esc(v)}</textarea></label>${h?`<div class="hint">${h}</div>`:""}`;
+function list(key,name,fields){return S[key].map((e,i)=>`<div class="entry"><div class="bar"><strong>${name} ${i+1}</strong><span style="margin-left:auto"></span>
+<button class="btn s" data-a="up" data-l="${key}" data-i="${i}" aria-label="Move up">↑</button><button class="btn s" data-a="dn" data-l="${key}" data-i="${i}" aria-label="Move down">↓</button>
+<button class="btn s" data-a="dup" data-l="${key}" data-i="${i}">Duplicate</button><button class="btn s d" data-a="del" data-l="${key}" data-i="${i}">Delete</button></div>${fields(e,i)}</div>`).join("")+`<button class="btn" data-a="add" data-l="${key}">+ Add ${name.toLowerCase()}</button>`}
+const views={p:()=>`<div class="two">${F("p.name","Full name",S.p.name)}${F("p.title","Professional title",S.p.title)}${F("p.email","Email",S.p.email,"email")}${F("p.phone","Phone",S.p.phone,"tel")}${F("p.city","City / region",S.p.city)}${F("p.link","Portfolio or LinkedIn URL",S.p.link,"url")}</div><div class="hint">We only ask for what a resume needs. No address, birth date or similar details.</div>`,
+s:()=>T("summary","Professional summary",S.summary,`${S.summary.trim()?S.summary.trim().split(/\s+/).length:0} words · 40–70 recommended. Describe only real experience.`),
+x:()=>list("exp","Experience",(e,i)=>`<div class="two">${F(`exp.${i}.title`,"Job title",e.title)}${F(`exp.${i}.org`,"Employer",e.org)}${F(`exp.${i}.start`,"Start",e.start,"month")}${e.cur?"":F(`exp.${i}.end`,"End",e.end,"month")}</div><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-c="exp.${i}.cur" ${e.cur?"checked":""}> I currently work here</label>${T(`exp.${i}.desc`,"Description (one bullet per line)",e.desc)}`),
+e:()=>list("edu","Education",(e,i)=>`<div class="two">${F(`edu.${i}.school`,"Institution",e.school)}${F(`edu.${i}.degree`,"Degree / field",e.degree)}${F(`edu.${i}.start`,"Start",e.start,"month")}${F(`edu.${i}.end`,"End",e.end,"month")}</div>`),
+k:()=>T("skills","Skills (comma separated)",S.skills),
+a:()=>`<label>Task<select id="aiT"><option value="sum">Improve my summary</option><option value="gram">Fix grammar of my summary</option><option value="bul">Rewrite one experience description</option><option value="cov">Draft a cover letter</option></select></label><label>Experience (for rewrite)<select id="aiE">${S.exp.map((e,i)=>`<option value="${i}">${esc(e.title||"Entry "+(i+1))}</option>`).join("")}</select></label><label>Target role (optional)<input type="text" id="aiR"></label><label>Job description (optional)<textarea id="aiJ">${esc(S.jd)}</textarea></label><div class="row" style="margin-top:10px"><button class="btn p" data-ai="run">Generate</button><button class="btn" data-ai="stop">Cancel</button></div><label>Result (editable, review before using)<textarea id="aiO" style="min-height:160px"></textarea></label><div class="row"><button class="btn" data-ai="acc">Accept into resume</button><button class="btn" data-ai="cp">Copy</button></div><div class="hint" id="aiM">AI runs through your Claude account after you give permission. It is told to use only facts already in your resume. Always check the output.</div>`,
+c:()=>{const R=ats(),sc=Math.max(0,100-R.reduce((a,x)=>a+({High:15,Med:8,Low:3})[x[0]],0)),k=kw();return`<div class="entry"><strong>Structure estimate: ${sc}/100</strong><div class="hint">Our own rule-based estimate (High -15, Medium -8, Low -3). It is not a test against any real employer ATS.</div></div>`+(R.length?R.map(x=>`<div class="entry"><strong>${x[0]}</strong>: ${esc(x[1])}</div>`).join(""):'<div class="entry">No issues found by these checks.</div>')+`<label>Job description<textarea data-k="jd" style="min-height:120px">${esc(S.jd)}</textarea></label><button class="btn" data-ai="rf">Compare</button>`+(k?`<div class="entry" style="margin-top:10px"><strong>Found in resume (${k.m.length}/${k.m.length+k.x.length})</strong><br>${esc(k.m.join(", ")||"none")}<br><br><strong>Not found</strong><br>${esc(k.x.join(", ")||"none")}<div class="hint">Missing does not mean you lack the skill. Add a term only if it is true and you can back it up. Never claim a qualification you do not have.</div></div>`:'<div class="hint">Paste a job description (20+ characters), then press Compare.</div>')},
+v:()=>{const V=vers();return`<div class="two"><input type="text" id="vL" placeholder="Version name, e.g. Data Analyst"><button class="btn p" data-v="save">Save version</button></div><div class="hint">Versions live in this browser. Saving one never changes your current resume.</div>`+(V.length?V.map((v,i)=>`<div class="entry bar"><strong>${esc(v.l)}</strong><span>${new Date(v.t).toLocaleDateString()}</span><span style="margin-left:auto"></span><button class="btn s" data-v="res" data-i="${i}">Restore</button><button class="btn s d" data-v="del" data-i="${i}">Delete</button></div>`).join(""):'<div class="entry">No saved versions yet.</div>')},
+o:()=>{const n={summary:"Summary",exp:"Experience",edu:"Education",skills:"Skills",proj:"Projects"};return S.order.map((k,i)=>`<div class="entry bar" style="margin-bottom:8px"><strong>${n[k]}</strong><span style="margin-left:auto"></span><button class="btn s" data-a="oup" data-i="${i}" aria-label="Move ${n[k]} up">↑</button><button class="btn s" data-a="odn" data-i="${i}" aria-label="Move ${n[k]} down">↓</button><button class="btn s" data-a="tgl" data-l="${k}">${S.hide.includes(k)?"Show":"Hide"}</button></div>`).join("")+`<div class="hint">Order and visibility apply to every template. Hidden sections keep their content.</div>`},
+j:()=>list("proj","Project",(e,i)=>`${F(`proj.${i}.name`,"Project name",e.name)}${F(`proj.${i}.url`,"Link",e.url)}${T(`proj.${i}.desc`,"What you built and your role",e.desc)}`)};
+const blanks={exp:{title:"",org:"",start:"",end:"",cur:false,desc:""},edu:{school:"",degree:"",start:"",end:""},proj:{name:"",url:"",desc:""}};
+function nav(){$("#nav").innerHTML=secs.map(([k,n])=>`<button class="${k===sec?"on":""}" data-s="${k}">${n}</button>`).join("")+`<button data-a="undo">↶ Undo</button><button data-a="redo">↷ Redo</button><button class="d" data-a="reset">Clear all</button>`;$("#secName").textContent=secs.find(s=>s[0]===sec)[1]}
+function form(){nav();$("#form").innerHTML=views[sec]()}
+function setPath(k,v){const a=k.split(".");let o=S;while(a.length>1){o=o[isNaN(a[0])?a[0]:+a[0]];a.shift()}o[a[0]]=v}
+document.addEventListener("input",e=>{const k=e.target.dataset.k;if(k===undefined)return;if(!e._s){snap()}setPath(k,e.target.value);draw();save();if(sec==="s")form_hint()});
+function form_hint(){const h=$("#form .hint");if(h)h.textContent=`${S.summary.trim()?S.summary.trim().split(/\s+/).length:0} words · 40–70 recommended. Describe only real experience.`}
+document.addEventListener("change",e=>{const c=e.target.dataset.c;if(c){snap();setPath(c,e.target.checked);form();draw();save()}});
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+if(d.go==="app"){$("#home").style.display="none";$("#app").style.display="block";scrollTo(0,0);if(!S.p.name&&!S.exp.length&&!S.summary){/* offer sample */$("#msg").textContent="Tip: start fresh or press 'Load sample' to see an example."}form();draw()}
+if(d.s){sec=d.s;form()}
+if(d.a){const l=d.l,i=+d.i;if(d.a==="add"){snap();S[l].push({...blanks[l]})}
+if(d.a==="del"&&confirm("Delete this entry?")){snap();S[l].splice(i,1)}
+if(d.a==="dup"){snap();S[l].splice(i+1,0,{...S[l][i]})}
+if(d.a==="up"&&i>0){snap();[S[l][i-1],S[l][i]]=[S[l][i],S[l][i-1]]}
+if(d.a==="dn"&&i<S[l].length-1){snap();[S[l][i+1],S[l][i]]=[S[l][i],S[l][i+1]]}
+if(d.a==="oup"&&i>0){snap();[S.order[i-1],S.order[i]]=[S.order[i],S.order[i-1]]}
+if(d.a==="odn"&&i<S.order.length-1){snap();[S.order[i+1],S.order[i]]=[S.order[i],S.order[i+1]]}
+if(d.a==="tgl"){snap();S.hide=S.hide.includes(l)?S.hide.filter(x=>x!==l):[...S.hide,l]}
+if(d.a==="undo"&&undo.length){redo.push(JSON.stringify(S));S=JSON.parse(undo.pop())}
+if(d.a==="redo"&&redo.length){undo.push(JSON.stringify(S));S=JSON.parse(redo.pop())}
+if(d.a==="reset"&&confirm("Clear the whole resume? You can undo this.")){snap();S=blank()}
+form();draw();save()}});
+const STOP=new Set("the and for with that this are you our will your from have has not all can who which their they them about into more other such than also any must may per work team role job years experience ability strong including etc able across using use".split(" "));
+const vers=()=>{try{return JSON.parse(localStorage.getItem("folio-ver")||"[]")}catch(e){return[]}};
+function txt(){return[S.p.name,S.p.title,S.summary,S.skills,...S.exp.map(e=>e.title+" "+e.org+" "+e.desc),...S.edu.map(e=>e.school+" "+e.degree),...S.proj.map(e=>e.name+" "+e.desc)].join(" ").toLowerCase()}
+function kw(){if(S.jd.trim().length<20)return null;const c={};(S.jd.toLowerCase().match(/[a-z][a-z+#.\-]{2,}/g)||[]).forEach(w=>{w=w.replace(/[.\-]+$/,"");if(w.length>3&&!STOP.has(w))c[w]=(c[w]||0)+1});const t=Object.keys(c).sort((a,b)=>c[b]-c[a]).slice(0,25),T=txt();return{m:t.filter(w=>T.includes(w)),x:t.filter(w=>!T.includes(w))}}
+function ats(){const r=[],a=(l,m)=>r.push([l,m]),p=S.p,wc=S.summary.trim()?S.summary.trim().split(/\s+/).length:0;
+if(!p.name)a("High","Add your full name.");if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(p.email))a("High","Add a valid email address.");if(!p.phone)a("Low","No phone number.");
+if(!wc)a("Med","No summary.");else if(wc<25||wc>90)a("Low","Summary is "+wc+" words; 40-70 is typical.");
+if(!S.exp.length)a("Med","No experience entries. Early-career? Add projects or internships.");
+S.exp.forEach((e,i)=>{if(!e.start)a("Med",`Experience ${i+1} has no start date.`);if(e.end&&e.start&&e.end<e.start)a("High",`Experience ${i+1} ends before it starts.`);if(/responsible for|worked on|helped with|duties included/i.test(e.desc))a("Low",`Experience ${i+1} uses weak phrasing like "worked on". Say what you did.`)});
+if(!S.skills.trim())a("Med","No skills listed.");if(S.tpl==="creative")a("Low","Creative layout may parse less reliably; Classic is safest.");return r}
+let AC;
+async function runAI(){const O=$("#aiO"),M=s=>{$("#aiM").textContent=s},T=$("#aiT").value,E=+$("#aiE").value||0;
+if(T==="bul"&&!S.exp.length)return M("Add an experience entry first.");
+const sm=await claude.use("sample");if(!sm)return M("AI is not available in this view. Open the page inside claude.ai.");
+const tk={sum:"Write a 40-70 word professional summary.",gram:"Correct grammar and clarity of the summary only; add no facts. Return only the corrected summary.",bul:`Rewrite the description of experience #${E+1} as 3-5 short bullets, one per line, each starting with an action verb. No invented metrics.`,cov:"Draft a cover letter of about 250 words. Do not invent facts about the company or the applicant."};
+const pr=`You are a resume-writing assistant. Use ONLY facts in the resume data below. Never invent employers, titles, degrees, skills, dates or numbers. If information is missing, stay conservative and add a line starting "[Confirm: ...]". Plain text only, no markdown.\nTask: ${tk[T]}\nTarget role: ${$("#aiR").value||"not given"}\nJob description: ${$("#aiJ").value||"not given"}\nResume data: ${JSON.stringify({p:S.p,summary:S.summary,exp:S.exp,edu:S.edu,skills:S.skills,proj:S.proj})}`;
+AC=new AbortController();M("Generating...");
+try{const r=await sm(pr,{signal:AC.signal,cache:false,onText:x=>{O.value=x.text}});O.value=r.text;M("Done. Edit the result, then accept or discard. Verify every fact.")}
+catch(e){M(e.code==="not_granted"?"AI permission was declined.":e.code==="rate_limited"?"Rate limited. Wait a moment, then retry.":"AI request failed or was cancelled. Your resume is unchanged.")}}
+document.addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset;
+if(d.v){const V=vers();if(d.v==="save")V.unshift({l:$("#vL").value||"Untitled",t:Date.now(),d:JSON.stringify(S)});
+if(d.v==="del"&&confirm("Delete this version?"))V.splice(+d.i,1);
+if(d.v==="res"&&confirm("Replace the current resume with this version? You can undo.")){snap();S=Object.assign(blank(),JSON.parse(V[+d.i].d));draw();save()}
+try{localStorage.setItem("folio-ver",JSON.stringify(V.slice(0,30)))}catch(x){alert("Storage full: could not save the version.")}form()}
+if(d.ai==="rf")form();if(d.ai==="run")runAI();if(d.ai==="stop"&&AC)AC.abort();
+if(d.ai==="cp"){try{await navigator.clipboard.writeText($("#aiO").value)}catch(x){}}
+if(d.ai==="acc"){const T=$("#aiT").value,o=$("#aiO").value.trim(),i=+$("#aiE").value;if(!o)return;
+if(T==="cov"){try{await navigator.clipboard.writeText(o)}catch(x){}return $("#aiM").textContent="Cover letters are copied to your clipboard, not inserted into the resume."}
+snap();if(T==="bul"&&S.exp[i])S.exp[i].desc=o;else S.summary=o;draw();save();$("#aiM").textContent="Applied. Use Undo to revert."}});
+$("#dl").onclick=async()=>{const tmp=document.createElement("div");tmp.innerHTML=resume(S);const dl=await claude.use("downloads");if(!dl){$("#msg").textContent="Downloads are unavailable in this view. Use Copy text instead.";return}try{await dl.save({filename:(S.p.name||"Resume").trim().replace(/\s+/g,"_")+"_Resume.txt",data:new Blob([tmp.innerText],{type:"text/plain"})})}catch(x){$("#msg").textContent="Download was cancelled or failed."}};
+$("#homeBtn").onclick=()=>{$("#app").style.display="none";$("#home").style.display="block"};
+$("#theme").onclick=()=>{const r=document.documentElement,dk=matchMedia("(prefers-color-scheme:dark)").matches;const cur=r.dataset.theme||(dk?"dark":"light");r.dataset.theme=cur==="dark"?"light":"dark"};
+$("#tpl").onchange=e=>{S.tpl=e.target.value;draw();save();$("#msg").textContent=S.tpl==="creative"?"Note: expressive layouts can be less reliable for some ATS parsers. Classic is the safest choice.":""};$("#size").onchange=e=>{S.size=e.target.value;draw();save()};["fs","lh","mg"].forEach(k=>$("#"+k).onchange=e=>{S[k]=e.target.value;draw();save()});$("#rst").onclick=()=>{Object.assign(S,{ac:"#2f5bea",fs:"12",lh:"1.45",mg:"34px 36px"});draw();save()};addEventListener("resize",draw);$("#ac").oninput=e=>{S.ac=e.target.value;draw();save()};
+$("#pdf").onclick=()=>{try{window.print()}catch(e){$("#msg").textContent="Printing is blocked here. Open the page in its own tab and try again."}$("#msg").textContent="In the print dialog choose “Save as PDF”. If nothing opens, open this page in its own browser tab."};
+$("#cp").onclick=async()=>{const tmp=document.createElement("div");tmp.innerHTML=resume(S);try{await navigator.clipboard.writeText(tmp.innerText);$("#msg").textContent="Resume text copied."}catch(e){$("#msg").textContent="Copy blocked by the browser."}};
+$("#tE").onclick=()=>$("#ed").classList.remove("pv");$("#tP").onclick=()=>{$("#ed").classList.add("pv");draw()};
+$("#heroPrev").innerHTML=`<div class="page modern sz-a4" style="--pc:#2f5bea">${resume(sample)}</div>`;
+</script></body></html>
